@@ -1,0 +1,19 @@
+# Demo-Thirty
+
+* Upgrading Webpack v4 to v5.
+
+https://github.com/node-fetch/node-fetch
+https://github.com/matthew-andrews/isomorphic-fetch
+https://github.com/lquixada/cross-fetch
+https://github.com/developit/unfetch
+
+* GraphQL, REST, AWS/cloud
+* TS
+* Testing
+* Linting
+
+
+### UPDATE:
+
+
+### TODO:
