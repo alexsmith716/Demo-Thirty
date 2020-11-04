@@ -4,12 +4,10 @@ import { Provider } from 'react-redux';
 import { Router, StaticRouter } from 'react-router';
 import { createMemoryHistory } from 'history';
 import { renderRoutes } from 'react-router-config';
-
-import { ChunkExtractor } from '@loadable/server';
-
 import { HelmetProvider } from 'react-helmet-async';
+import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import fetch from 'node-fetch';
-import { ServerStyleSheet } from 'styled-components';
 
 import { resolvers } from './graphql/resolvers/resolvers.js';
 
@@ -174,15 +172,14 @@ export default (statsFile) => async (req, res) => {
 		//  await Promise.all([getMarkupFromTree({tree, renderFunction: renderToStaticMarkup})]);
 		// =====================================================
 
-		//  const content = renderToString(sheet.collectStyles(component));
-		const body = renderToString(tree);
+		const content = renderToString(sheet.collectStyles(tree));
 
 		const storeState = JSON.stringify(store.getState());
 		const graphqlState = JSON.stringify(clientApollo.extract());
 
 		const styledComponents = sheet.getStyleElement();
 
-		console.log('>>>> SERVER > styledComponents: ', styledComponents);
+		console.log('>>>> SERVER > styledComponents1111: ', styledComponents);
 
 		const html = (
 			<Html
@@ -190,7 +187,7 @@ export default (statsFile) => async (req, res) => {
 				styleElements={styleElements}
 				scriptElements={scriptElements}
 				store={storeState}
-				content={body}
+				content={content}
 				styledComponents={styledComponents}
 				graphqlState={graphqlState}
 			/>
