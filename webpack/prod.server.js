@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
+const TerserPlugin = require('terser-webpack-plugin');
+
 const rootPath = path.resolve(__dirname, '..');
 
 const generatedIdent = (name, localName, lr) => {
@@ -152,6 +154,12 @@ module.exports = {
 		],
 	},
 
+	optimization: {
+		minimizer: [
+			new TerserPlugin(),
+		],
+	},
+
 	performance: {
 		hints: false,
 	},
@@ -162,7 +170,6 @@ module.exports = {
 
 	plugins: [
 		new ForkTsCheckerWebpackPlugin(),
-		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.optimize.LimitChunkCountPlugin({
 			maxChunks: 1,
 		}),

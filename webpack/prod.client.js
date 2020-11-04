@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const rootPath = path.resolve(__dirname, '../');
 const publicPath = path.resolve(rootPath, './public');
@@ -165,6 +166,19 @@ module.exports = {
 	},
 
 	optimization: {
+		minimize: true,
+		minimizer: [
+			new TerserPlugin({
+				terserOptions: {
+					output: {
+						comments: false,
+					},
+					compress: {
+						drop_console: true,
+					},
+				},
+			}),
+		],
 		splitChunks: {
 			chunks: 'all',
 			cacheGroups: {
@@ -190,7 +204,6 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name].[contenthash].css'
 		}),
-		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.DefinePlugin({
 			'process.env.IS_CLIENT': JSON.stringify(true),
 			__CLIENT__: true,
