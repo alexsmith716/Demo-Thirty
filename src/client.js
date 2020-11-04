@@ -84,6 +84,8 @@ const render = async () => {
 		spinnerContainer.classList.remove('spinner');
 	};
 
+  console.log('>>>> CLIENT +++++++++++++++++++++++++++++');
+
 	const hydrate = (hydrateRoutes) => {
 		const element = (
 			<HelmetProvider>
