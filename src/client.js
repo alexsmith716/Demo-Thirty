@@ -28,17 +28,17 @@ import isOnline from './utils/isOnline';
 import { ThemeContext } from './styled/ThemeContext';
 
 const persistConfig = {
-  key: 'root',
-  storage: localForage,
-  // redux-persist:
-  // inboundState:  the state being rehydrated from storage
-  // originalState: the state before the REHYDRATE action
-  stateReconciler(inboundState, originalState) {
-    // preloadedState from window object
-    return originalState;
-  },
-  // redux-persist:
-  // whitelist: ['info', 'infoAlert', 'infoAlertThree',],
+	key: 'root',
+	storage: localForage,
+	// redux-persist:
+	// inboundState:  the state being rehydrated from storage
+	// originalState: the state before the REHYDRATE action
+	stateReconciler(inboundState, originalState) {
+		// preloadedState from window object
+		return originalState;
+	},
+	// redux-persist:
+	// whitelist: ['info', 'infoAlert', 'infoAlertThree',],
 };
 
 const spinnerContainer = document.createElement('div');
@@ -49,7 +49,7 @@ document.body.insertBefore(spinnerContainer, dest);
 const client = apiClient();
 
 const providers = {
-  client,
+	client,
 };
 
 // =====================================================
@@ -57,54 +57,54 @@ const providers = {
 //  (async () => {
 const render = async () => {
 
-  // redux-persist:
-  // delays rendering of app UI until persisted state has been retrieved and saved to redux
-  const preloadedState = await getStoredState(persistConfig);
-  const online = window.REDUX_DATA ? true : await isOnline();
-  const history = createBrowserHistory();
+	// redux-persist:
+	// delays rendering of app UI until persisted state has been retrieved and saved to redux
+	const preloadedState = await getStoredState(persistConfig);
+	const online = window.REDUX_DATA ? true : await isOnline();
+	const history = createBrowserHistory();
 
-  const store = configureStore({
-    history,
-    data: {
-      ...preloadedState,
-      ...window.REDUX_DATA,
-      online,
-    },
-    helpers: providers,
-    persistConfig,
-  });
+	const store = configureStore({
+		history,
+		data: {
+			...preloadedState,
+			...window.REDUX_DATA,
+			online,
+		},
+		helpers: providers,
+		persistConfig,
+	});
 
-  const triggerHooks = async (hydrateRoutes, pathname) => {
-    spinnerContainer.classList.add('spinner');
-    if (window.__PRELOADED__) {
-      delete window.__PRELOADED__;
-    } else {
-      await asyncGetPromises(hydrateRoutes, pathname, store);
-    }
-    spinnerContainer.classList.remove('spinner');
-  };
+	const triggerHooks = async (hydrateRoutes, pathname) => {
+		spinnerContainer.classList.add('spinner');
+		if (window.__PRELOADED__) {
+			delete window.__PRELOADED__;
+		} else {
+			await asyncGetPromises(hydrateRoutes, pathname, store);
+		}
+		spinnerContainer.classList.remove('spinner');
+	};
 
-  const hydrate = (hydrateRoutes) => {
-    const element = (
-      <HelmetProvider>
-        <Provider store={store}>
-          <Router history={history}>
-            <ThemeContext>
-              <RouterTrigger triggerProp={(pathname) => triggerHooks(hydrateRoutes, pathname)}>
-                {renderRoutes(hydrateRoutes)}
-              </RouterTrigger>
-            </ThemeContext>
-          </Router>
-        </Provider>
-      </HelmetProvider>
-    );
+	const hydrate = (hydrateRoutes) => {
+		const element = (
+			<HelmetProvider>
+				<Provider store={store}>
+					<Router history={history}>
+						<ThemeContext>
+							<RouterTrigger triggerProp={(pathname) => triggerHooks(hydrateRoutes, pathname)}>
+								{renderRoutes(hydrateRoutes)}
+							</RouterTrigger>
+						</ThemeContext>
+					</Router>
+				</Provider>
+			</HelmetProvider>
+		);
 
-    ReactDOM.hydrate(element, dest);
-  };
+		ReactDOM.hydrate(element, dest);
+	};
 
-  hydrate(routes);
+	hydrate(routes);
 };
 
 loadableReady(() => {
-  render();
+	render();
 });
