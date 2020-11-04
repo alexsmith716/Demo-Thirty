@@ -17,3 +17,5 @@ https://github.com/developit/unfetch
 
 
 ### TODO:
+
+"the default <style> tag attribute, data-styled"
