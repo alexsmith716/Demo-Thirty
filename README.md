@@ -15,7 +15,9 @@ https://github.com/developit/unfetch
 
 ### UPDATE:
 
+The  `collectStyles` method wraps your element in a provider. Optionally you can use the `StyleSheetManager` provider directly, instead of this method. 
+
+The `collectChunks` method wraps your element in a provider. Optionally you can use the `ChunkExtractorManager` provider directly, instead of this method.
+
 
 ### TODO:
-
-"the default <style> tag attribute, data-styled"
