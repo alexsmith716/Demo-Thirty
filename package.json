@@ -20,7 +20,7 @@
 		"format": "prettier --config .prettierrc --write src/"
 	},
 	"dependencies": {
-		"@apollo/client": "^3.3.0-beta.17",
+		"@apollo/client": "^3.3.0-rc.0",
 		"@loadable/component": "^5.14.1",
 		"@loadable/server": "^5.14.0",
 		"axios": "^0.21.0",

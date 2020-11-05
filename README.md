@@ -19,5 +19,7 @@ The  `collectStyles` method wraps your element in a provider. Optionally you can
 
 The `collectChunks` method wraps your element in a provider. Optionally you can use the `ChunkExtractorManager` provider directly, instead of this method.
 
+https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+https://webpack.js.org/guides/code-splitting/
 
 ### TODO:
