@@ -23,6 +23,8 @@ const Html: React.FC<Props> = ({
 	graphqlState,
 }) => {
 
+  console.log('############# HTML:::: ', content)
+
 	return (
 		<html lang="en-US">
 			<head>
@@ -41,7 +43,7 @@ const Html: React.FC<Props> = ({
 				{/* (>>>>>>> LinkElements <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
 				{linkElements}
 
-				{/* (>>>>>>> STYLED-COMPONENTS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
+				{/* (>>>>>>> styled-components <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
 				{styledComponents}
 
 				{/* (>>>>>>> StyleElements <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}

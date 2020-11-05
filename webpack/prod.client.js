@@ -167,18 +167,18 @@ module.exports = {
 
 	optimization: {
 		minimize: true,
-		minimizer: [
-			new TerserPlugin({
-				terserOptions: {
-					output: {
-						comments: false,
-					},
-					compress: {
-						drop_console: true,
-					},
-				},
-			}),
-		],
+    //  minimizer: [
+    //  	new TerserPlugin({
+    //  		terserOptions: {
+    //  			output: {
+    //  				comments: false,
+    //  			},
+    //  			compress: {
+    //  				drop_console: true,
+    //  			},
+    //  		},
+    //  	}),
+    //  ],
 		splitChunks: {
 			chunks: 'all',
 			cacheGroups: {

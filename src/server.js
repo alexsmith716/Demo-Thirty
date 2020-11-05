@@ -173,13 +173,10 @@ export default (statsFile) => async (req, res) => {
 		// =====================================================
 
 		const content = renderToString(sheet.collectStyles(tree));
+		const styledComponents = sheet.getStyleElement();
 
 		const storeState = JSON.stringify(store.getState());
 		const graphqlState = JSON.stringify(clientApollo.extract());
-
-		const styledComponents = sheet.getStyleElement();
-
-		console.log('>>>> SERVER > styledComponents1111: ', styledComponents);
 
 		const html = (
 			<Html
@@ -196,7 +193,7 @@ export default (statsFile) => async (req, res) => {
 		const ssrHtml = `<!DOCTYPE html>${renderToString(html)}`;
 		return res.status(200).send(ssrHtml);
 	} catch (error) {
-		console.log('>>>> SERVER > RESPONSE > ERRRRRRROOOOORRRR!!!: ', error);
+		console.log('>>>> SERVER > RESPONSE > ERROR: ', error);
 		// const errorHtml = `<!DOCTYPE html><html lang="en"><div>Error Loading. Response Status 500.</div></html>`;
 		return res.status(500).send(error);
 	}
