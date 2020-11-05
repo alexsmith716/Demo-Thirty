@@ -5,8 +5,8 @@ import { Router, StaticRouter } from 'react-router';
 import { createMemoryHistory } from 'history';
 import { renderRoutes } from 'react-router-config';
 import { HelmetProvider } from 'react-helmet-async';
-import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
+import { ChunkExtractor } from '@loadable/server';
+import { ServerStyleSheet } from 'styled-components';
 import fetch from 'node-fetch';
 
 import { resolvers } from './graphql/resolvers/resolvers.js';
