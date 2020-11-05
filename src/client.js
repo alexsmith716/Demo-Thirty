@@ -11,9 +11,8 @@ import { loadableReady } from '@loadable/component';
 import localForage from 'localforage';
 import { getStoredState } from 'redux-persist';
 
-import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, ApolloLink } from '@apollo/client';
-
-import { onError } from '@apollo/client/link/error';
+//	import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, ApolloLink } from '@apollo/client';
+//	import { onError } from '@apollo/client/link/error';
 
 import { Provider } from 'react-redux';
 import asyncGetPromises from './utils/asyncGetPromises';
@@ -54,7 +53,6 @@ const providers = {
 
 // =====================================================
 
-//  (async () => {
 const render = async () => {
 
 	// redux-persist:
@@ -84,8 +82,6 @@ const render = async () => {
 		spinnerContainer.classList.remove('spinner');
 	};
 
-	console.log('>>>> CLIENT +++++++++++++++++++++++++++++');
-
 	const hydrate = (hydrateRoutes) => {
 		const element = (
 			<HelmetProvider>
@@ -101,7 +97,11 @@ const render = async () => {
 			</HelmetProvider>
 		);
 
-		ReactDOM.hydrate(element, dest);
+		if (dest.hasChildNodes()) {
+			ReactDOM.hydrate(element, dest);
+		} else {
+			ReactDOM.render(element, dest);
+		}
 	};
 
 	hydrate(routes);
