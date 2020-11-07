@@ -5,6 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const rootPath = path.resolve(__dirname, '../');
 const publicPath = path.resolve(rootPath, './public');
@@ -20,7 +21,7 @@ module.exports = {
 	context: path.resolve(__dirname, '..'),
 	name: 'client',
 	target: 'web',
-	mode: 'production',
+	mode: 'development',
 
 	entry: {
 		main: ['./src/client.js'],
@@ -167,46 +168,46 @@ module.exports = {
 
 	optimization: {
 		minimize: true,
-		minimizer: [
-			new TerserPlugin({
-				terserOptions: {
-					output: {
-						comments: false,
-					},
-					compress: {
-						drop_console: true,
-					},
-				},
-			}),
-		],
-		//	splitChunks: {
-		//		chunks: 'all',
-		//		cacheGroups: {
-		//			defaultVendors: {
-		//				test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-		//				name: 'vendor',
-		//				chunks: 'all',
-		//			},
-		//		},
-		//	},
-		//	https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
-		moduleIds: 'deterministic',
-		runtimeChunk: 'single',
+		//  minimizer: [
+		//  	new TerserPlugin({
+		//  		terserOptions: {
+		//  			output: {
+		//  				comments: false,
+		//  			},
+		//  			compress: {
+		//  				drop_console: true,
+		//  			},
+		//  		},
+		//  	}),
+		//  ],
 		splitChunks: {
 			chunks: 'all',
-			maxInitialRequests: Infinity,
-			minSize: 20000,
-			// minSize: 64000,
 			cacheGroups: {
 				defaultVendors: {
-					test: /\/node_modules\//,
-					name(module) {
-						const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-						return `npm.${packageName.replace('@', '')}`;
-					},
+					test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+					name: 'vendor',
+					chunks: 'all',
 				},
 			},
 		},
+		//	https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+		//	moduleIds: 'deterministic',
+		//	runtimeChunk: 'single',
+		//	splitChunks: {
+		//		chunks: 'all',
+		//		maxInitialRequests: Infinity,
+		//		minSize: 20000,
+		//		// minSize: 64000,
+		//		cacheGroups: {
+		//			defaultVendors: {
+		//				test: /\/node_modules\//,
+		//				name(module) {
+		//					const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+		//					return `npm.${packageName.replace('@', '')}`;
+		//				},
+		//			},
+		//		},
+		//	},
 	},
 
 	resolve: {
@@ -218,7 +219,6 @@ module.exports = {
 		new CopyPlugin({
 			patterns: [{ from: './**', to: assetPath, context: './public' }],
 		}),
-		new LoadablePlugin(),
 		new MiniCssExtractPlugin({
 			filename: '[name].[contenthash].css'
 		}),
@@ -228,6 +228,11 @@ module.exports = {
 			__SERVER__: false,
 			__DEVELOPMENT__: false,
 			__DEVTOOLS__: false,
+		}),
+		new LoadablePlugin(),
+		new BundleAnalyzerPlugin({
+			analyzerMode: "static",
+			openAnalyzer: false,
 		}),
 	],
 };

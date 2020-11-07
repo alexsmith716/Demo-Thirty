@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"main": "bin/main.js",
 	"scripts": {
-		"prod": "NODE_ENV=production PORT=8080 node ./bin/main.js",
+		"prod": "NODE_ENV=development PORT=8080 node ./bin/main.js",
 		"clean": "rimraf build dist",
 		"test": "IS_CLIENT=false jest src",
 		"check-types-t": "tsc --traceResolution",
@@ -110,6 +110,7 @@
 		"typescript": "^4.0.5",
 		"url-loader": "^4.1.1",
 		"webpack": "^5.4.0",
+		"webpack-bundle-analyzer": "^4.0.0",
 		"webpack-node-externals": "^2.5.2"
 	}
 }
