@@ -33,7 +33,7 @@ export const NavBar: React.FC = () => {
 	};
 
 	return (
-		<Styles.NavBar className="navbar">
+		<Styles.NavBar>
 			<div className="container">
 				<Styles.Expand>
 					<Styles.NavBarBrandLink

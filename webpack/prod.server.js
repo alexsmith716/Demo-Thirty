@@ -18,7 +18,7 @@ module.exports = {
 	name: 'server',
 	target: 'node',
 	externals: [nodeExternals()],
-	mode: 'production',
+	mode: 'development',
 
 	entry: {
 		server: './src/server.js',

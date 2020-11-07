@@ -119,12 +119,12 @@ webpack([clientConfigProd, serverConfigProd]).run((err, stats) => {
 		logger.warn('>>>> BIN > START > clientStats.warnings: ', serverStats.warnings);
 	}
 
-	const webStats = path.resolve(__dirname,'../dist/loadable-stats.json');
+	const statsFile = path.resolve(__dirname,'../dist/loadable-stats.json');
 
 	// eslint-disable-next-line import/no-unresolved
 	const serverRender = require('../build/server.js').default;
 
-	app.use(serverRender(webStats));
+	app.use(serverRender(statsFile));
 
 	done();
 });
