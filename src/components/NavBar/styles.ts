@@ -6,7 +6,7 @@ import { SvgTimes } from '../../assets/svg';
 
 interface Props {
 	readonly clicked?: boolean;
-	readonly isActive?: boolean;
+	readonly activelink?: string;
 }
 
 const NavBarBGTheme = css`
@@ -93,8 +93,10 @@ export const NavBarNavA = styled.a`
 	}
 `;
 
+// 	modify to:
+//	https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/NavLink.md
 export const NavBarNavLink = styled(Link)<Props>`
-	color: ${(props) => (props.isActive ? colors.ivory : colors.grayFive)};
+	color: ${(props) => (props.activelink === 'true' ? colors.ivory : colors.grayFive)};
 	text-decoration: none;
 
 	&:hover {

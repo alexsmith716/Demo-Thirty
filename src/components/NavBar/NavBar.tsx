@@ -51,10 +51,11 @@ export const NavBar: React.FC = () => {
 						</li>
 
 						{NavLinks.map((item, index) => {
+							let a = activeRoute === item.url;
 							return (
 								<li key={index}>
 									<Styles.NavBarNavLink
-										isActive={activeRoute === item.url}
+										activelink={a.toString()}
 										to={item.url}
 										onClick={() => setClicked(false)}
 									>
