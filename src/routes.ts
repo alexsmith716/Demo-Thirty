@@ -3,6 +3,7 @@ import { App } from './containers/App';
 import Home from './containers/Home';
 import NotFound from './containers/NotFound';
 
+//  import About from './containers/About/About';
 import About from './containers/About/Loadable';
 import GraphqlPage from './containers/GraphqlPage/Loadable';
 

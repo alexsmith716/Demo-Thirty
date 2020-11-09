@@ -5,8 +5,8 @@ import { Router, StaticRouter } from 'react-router';
 import { createMemoryHistory } from 'history';
 import { renderRoutes } from 'react-router-config';
 import { HelmetProvider } from 'react-helmet-async';
-import { ChunkExtractorManager, ChunkExtractor } from '@loadable/server';
-import { StyleSheetManager, ServerStyleSheet } from 'styled-components';
+import { ChunkExtractor } from '@loadable/server';
+import { ServerStyleSheet } from 'styled-components';
 import fetch from 'node-fetch';
 
 import { resolvers } from './graphql/resolvers/resolvers.js';
@@ -180,15 +180,16 @@ export default (statsFile) => async (req, res) => {
 		const content = renderToString(sheet.collectStyles(tree));
 		// =====================================================
 
-		//const content = renderToString(App);
-
 		// =====================================================
 		// STYLED-COMPONENTS 
 		const styledComponents = sheet.getStyleElement();
 		// =====================================================
 
+		// =====================================================
+		// LOADABLE-COMPONENTS 
 		const storeState = JSON.stringify(store.getState());
 		const graphqlState = JSON.stringify(clientApollo.extract());
+		// =====================================================
 
 		const html = (
 			<Html
