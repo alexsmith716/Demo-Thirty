@@ -180,34 +180,34 @@ module.exports = {
 		//  		},
 		//  	}),
 		//  ],
-		splitChunks: {
-			chunks: 'all',
-			cacheGroups: {
-				defaultVendors: {
-					test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-					name: 'vendor',
-					chunks: 'all',
-				},
-			},
-		},
-		//	https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
-		//	moduleIds: 'deterministic',
-		//	runtimeChunk: 'single',
 		//	splitChunks: {
 		//		chunks: 'all',
-		//		maxInitialRequests: Infinity,
-		//		minSize: 20000,
-		//		// minSize: 64000,
 		//		cacheGroups: {
 		//			defaultVendors: {
-		//				test: /\/node_modules\//,
-		//				name(module) {
-		//					const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-		//					return `npm.${packageName.replace('@', '')}`;
-		//				},
+		//				test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+		//				name: 'vendor',
+		//				chunks: 'all',
 		//			},
 		//		},
 		//	},
+		//	https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
+		moduleIds: 'deterministic',
+		runtimeChunk: 'single',
+		splitChunks: {
+			chunks: 'all',
+			maxInitialRequests: Infinity,
+			minSize: 20000,
+			// minSize: 64000,
+			cacheGroups: {
+				defaultVendors: {
+					test: /\/node_modules\//,
+					name(module) {
+						const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+						return `npm.${packageName.replace('@', '')}`;
+					},
+				},
+			},
+		},
 	},
 
 	resolve: {
@@ -230,9 +230,9 @@ module.exports = {
 			__DEVTOOLS__: false,
 		}),
 		new LoadablePlugin(),
-		new BundleAnalyzerPlugin({
-			analyzerMode: "static",
-			openAnalyzer: false,
-		}),
+		//	new BundleAnalyzerPlugin({
+		//		analyzerMode: "static",
+		//		openAnalyzer: false,
+		//	}),
 	],
 };

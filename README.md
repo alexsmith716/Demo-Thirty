@@ -24,6 +24,8 @@ Optionally you can use the `ChunkExtractorManager` provider directly, instead of
 https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
 https://webpack.js.org/guides/code-splitting/
 
+https://github.com/gregberge/loadable-components/issues/659
+
 ### TODO:
 
 Fix broken styled context. Planned to go over all that next anyways. 
